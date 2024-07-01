@@ -1,0 +1,53 @@
+function
+calculateNetSalary = (basicSalary, benefits); {
+// constants
+    const personalRelief = 2400;
+    
+// PAYE calculation
+let taxableIncome = grossSalary - nssfDeduction;
+  let paye = 0;
+  if (taxableIncome <= 24000) {
+      paye = taxableIncome * 0.10;
+  }else if (taxableIncome <=  32333){
+      paye = 2400 + (taxableIncome - 24000) *0.25;
+  }else if (taxableIncome <= 500000) {
+      paye = 2400 + 2083.25 + 140000.1 + 97500 + (taxableIncome - 800000) *0.325;
+  }else {
+      paye = 2400 + 2083.25 + 140000.1 + (taxableIncome - 800000) *0.35;
+  }   
+  console.log(`Gross Salary : Ksh $ {result.grossSalary}`)
+   
+     // NHIF Deduction
+    const nhifDeduction = nhifRates.find(rate => grossSalary <= rate.limit).rate;
+
+console.log(`NHIF Deduction: Ksh $ {result.nhifDeduction}`);
+
+
+   // NSSF Rates
+    const nssfTierI = 0.06 * Math.min(7000, basicSalary);
+    const nssfTierII = 0.06 * Math.min(Math.max(0, basicSalary - 7000), 29000);
+    const nssfDeduction = nssfTierI + nssfTierII;
+  console.log(`NSSF Deduction: Ksh $ {result.nssfDeduction}`);
+
+    // Gross Salary
+    const grossSalary = basicSalary + benefits;
+console.log(`Gross Salary : ksh ${result.grossSalary} `);
+
+//  NET Salary
+    const netSalary = grossSalary - (paye + nhifDeduction + nssfDeduction);
+
+console.log(`Net Salary: ksh $ {result.paye}`);
+    return {
+        grossSalary: grossSalary,
+        nssfDeduction: nssfDeduction,
+        nhifDeduction: nhifDeduction,
+        paye: paye,
+        netSalary: netSalary,
+
+        //Example Usage
+        const basicSalary = 30000,
+        const benefits = 5000,
+        const result = calculateNetSalary(basicSalary, benefits),
+ 
+    };
+}
