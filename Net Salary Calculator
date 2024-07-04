@@ -28,7 +28,7 @@ function calculateGrossSalary(basicPay, benefits) {
       } else if (grossSalaryMinusNSSF > 10000) {
         salaryMinusNHIF = grossSalary - 1000;
       }
-      console.log(Your salaryminusNSSF:, salaryMinusNHIF);
+      console.log(salaryMinusNHIF);
 
       function calculateTax() {
         let salaryMinusTax;
