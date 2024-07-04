@@ -1,53 +1,58 @@
-function
-calculateNetSalary = (basicSalary, benefits); {
-// constants
-    const personalRelief = 2400;
-    
-// PAYE calculation
-let taxableIncome = grossSalary - nssfDeduction;
-  let paye = 0;
-  if (taxableIncome <= 24000) {
-      paye = taxableIncome * 0.10;
-  }else if (taxableIncome <=  32333){
-      paye = 2400 + (taxableIncome - 24000) *0.25;
-  }else if (taxableIncome <= 500000) {
-      paye = 2400 + 2083.25 + 140000.1 + 97500 + (taxableIncome - 800000) *0.325;
-  }else {
-      paye = 2400 + 2083.25 + 140000.1 + (taxableIncome - 800000) *0.35;
-  }   
-  console.log(`Gross Salary : Ksh $ {result.grossSalary}`)
-   
-     // NHIF Deduction
-    const nhifDeduction = nhifRates.find(rate => grossSalary <= rate.limit).rate;
+function calculateGrossSalary(basicPay, benefits) {
+  const grossSalary = basicPay + benefits;
+  console.log("Your gross salary is: ", grossSalary);
 
-console.log(`NHIF Deduction: Ksh $ {result.nhifDeduction}`);
+  function calculateGrossSalaryMinusNSSF() {
+    let grossSalaryMinusNSSF;
 
+    if (grossSalary > 40000) {
+      grossSalaryMinusNSSF = grossSalary - 15000;
+    } else if (grossSalary > 30000) {
+      grossSalaryMinusNSSF = grossSalary - 3000;
+    } else if (grossSalary > 20000) {
+      grossSalaryMinusNSSF = grossSalary - 2000;
+    } else if (grossSalary > 10000) {
+      grossSalaryMinusNSSF = grossSalary - 1000;
+    }
 
-   // NSSF Rates
-    const nssfTierI = 0.06 * Math.min(7000, basicSalary);
-    const nssfTierII = 0.06 * Math.min(Math.max(0, basicSalary - 7000), 29000);
-    const nssfDeduction = nssfTierI + nssfTierII;
-  console.log(`NSSF Deduction: Ksh $ {result.nssfDeduction}`);
+    console.log("Your salary minus NSSF is: ", grossSalaryMinusNSSF);
 
-    // Gross Salary
-    const grossSalary = basicSalary + benefits;
-console.log(`Gross Salary : ksh ${result.grossSalary} `);
+    function calculateSalaryMinusNHIF() {
+      let salaryMinusNHIF;
+      if (grossSalaryMinusNSSF > 40000) {
+        salaryMinusNHIF = grossSalaryMinusNSSF - 15000;
+      } else if (grossSalaryMinusNSSF > 30000) {
+        salaryMinusNHIF = grossSalaryMinusNSSF - 3000;
+      } else if (grossSalaryMinusNSSF > 20000) {
+        salaryMinusNHIF = grossSalaryMinusNSSF - 2000;
+      } else if (grossSalaryMinusNSSF > 10000) {
+        salaryMinusNHIF = grossSalary - 1000;
+      }
+      console.log(Your salaryminusNSSF:, salaryMinusNHIF);
 
-//  NET Salary
-    const netSalary = grossSalary - (paye + nhifDeduction + nssfDeduction);
+      function calculateTax() {
+        let salaryMinusTax;
 
-console.log(`Net Salary: ksh $ {result.paye}`);
-    return {
-        grossSalary: grossSalary,
-        nssfDeduction: nssfDeduction,
-        nhifDeduction: nhifDeduction,
-        paye: paye,
-        netSalary: netSalary,
-
-        //Example Usage
-        const basicSalary = 30000,
-        const benefits = 5000,
-        const result = calculateNetSalary(basicSalary, benefits),
- 
-    };
+        if (salaryMinusNHIF > 40000) {
+          salaryMinusTax = salaryMinusNHIF - 15000;
+        } else if (salaryMinusNHIF > 30000) {
+          salaryMinusTax = salaryMinusNHIF - 3000;
+        } else if (salaryMinusNHIF > 20000) {
+          salaryMinusTax = salaryMinusNHIF - 2000;
+        } else if (salaryMinusNHIF > 10000) {
+          salaryMinusTax = salaryMinusNHIF - 1000;
+        }
+        console.log(
+          "From the nested callbacks function, your net salary is: ",
+          salaryMinusTax
+        );
+        return salaryMinusTax;
+      }
+      calculateTax();
+    }
+    calculateSalaryMinusNHIF();
+  }
+  calculateGrossSalaryMinusNSSF();
 }
+
+calculateGrossSalary(74000, 1000);
