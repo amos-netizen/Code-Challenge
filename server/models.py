@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 from sqlalchemy.orm import validates
 from sqlalchemy.ext.associationproxy import association_proxy
+
 from sqlalchemy.ext.serializer import SerializerMixin
 metadata = MetaData(
     naming_convention={
